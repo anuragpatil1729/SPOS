@@ -1,6 +1,4 @@
 
-package assgn1;
-
 import java.io.*;
 import java.util.*;
 
@@ -8,17 +6,16 @@ class Pass1 {
     public static void main(String args[]) throws Exception {
 
         BufferedReader br = new BufferedReader(
-            new FileReader("initial.txt")
-        );
+                new FileReader("initial.txt"));
 
         String IS[] = {
-            "STOP", "ADD", "SUB", "MULT", "MOVER",
-            "MOVEM", "COMP", "BC", "DIV", "READ", "PRINT"
+                "STOP", "ADD", "SUB", "MULT", "MOVER",
+                "MOVEM", "COMP", "BC", "DIV", "READ", "PRINT"
         };
 
-        String REG[] = {"AREG", "BREG", "CREG", "DREG"};
-        String AD[] = {"START", "END"};
-        String DL[] = {"DC", "DS"};
+        String REG[] = { "AREG", "BREG", "CREG", "DREG" };
+        String AD[] = { "START", "END" };
+        String DL[] = { "DC", "DS" };
 
         String symbol[] = new String[10];
         int symbolAddress[] = new int[10];
@@ -37,8 +34,7 @@ class Pass1 {
 
         while ((line = br.readLine()) != null) {
 
-            StringTokenizer stoken =
-                new StringTokenizer(line, " ,\t");
+            StringTokenizer stoken = new StringTokenizer(line, " ,\t");
 
             if (!stoken.hasMoreTokens())
                 continue;
@@ -67,9 +63,9 @@ class Pass1 {
                 symbolAddress[symbolCount] = address;
 
                 output.append(address)
-                      .append(" S")
-                      .append(symbolCount)
-                      .append(" ");
+                        .append(" S")
+                        .append(symbolCount)
+                        .append(" ");
 
                 symbolCount++;
 
@@ -85,8 +81,8 @@ class Pass1 {
                 if (word.equals(IS[i])) {
 
                     output.append("IS ")
-                           .append(i + 1)
-                           .append(" ");
+                            .append(i + 1)
+                            .append(" ");
 
                     while (stoken.hasMoreTokens()) {
 
@@ -105,8 +101,8 @@ class Pass1 {
                             literal[literalCount] = operand;
 
                             output.append("L")
-                                  .append(literalCount)
-                                  .append(" ");
+                                    .append(literalCount)
+                                    .append(" ");
 
                             literalCount++;
                         }
@@ -129,16 +125,16 @@ class Pass1 {
                                 symbolAddress[symbolCount] = 0;
 
                                 output.append("S")
-                                      .append(symbolCount)
-                                      .append(" ");
+                                        .append(symbolCount)
+                                        .append(" ");
 
                                 symbolCount++;
 
                             } else {
 
                                 output.append("S")
-                                      .append(found)
-                                      .append(" ");
+                                        .append(found)
+                                        .append(" ");
                             }
                         }
                     }
@@ -184,8 +180,8 @@ class Pass1 {
 
         for (int i = 0; i < symbolCount; i++) {
             System.out.println(i + "\t" +
-                symbol[i] + "\t" +
-                symbolAddress[i]);
+                    symbol[i] + "\t" +
+                    symbolAddress[i]);
         }
 
         // LITERAL TABLE
@@ -195,19 +191,18 @@ class Pass1 {
 
         for (int i = 0; i < literalCount; i++) {
             System.out.println(i + "\t" +
-                literal[i] + "\t" +
-                literalAddress[i]);
+                    literal[i] + "\t" +
+                    literalAddress[i]);
         }
 
         System.out.println("\nPass 1 Completed Successfully!");
     }
 
     static boolean isOperation(
-        String word,
-        String IS[],
-        String AD[],
-        String DL[]
-    ) {
+            String word,
+            String IS[],
+            String AD[],
+            String DL[]) {
 
         for (String x : IS)
             if (word.equals(x))
@@ -230,9 +225,9 @@ class Pass1 {
             return false;
 
         if (word.equals("AREG") ||
-            word.equals("BREG") ||
-            word.equals("CREG") ||
-            word.equals("DREG"))
+                word.equals("BREG") ||
+                word.equals("CREG") ||
+                word.equals("DREG"))
             return false;
 
         return Character.isLetter(word.charAt(0));
